@@ -50,12 +50,12 @@
             "CF",
             "DCCN",
             "MIT",
-            "IPF",
+            "IPE",
             "CGM",
             "DBMS",
             "SE",
             "ELS",
-            "AAF",
+            "MITP",
             "CSSD",
             "AAF",
             "ADBCSA"});
@@ -78,7 +78,7 @@
             this.Viewbtn.UseCustomForeColor = true;
             this.Viewbtn.UseSelectable = true;
             this.Viewbtn.UseStyleColors = true;
-            this.Viewbtn.Click += new System.EventHandler(this.Viewbtn_Click);
+            this.Viewbtn.Click += new System.EventHandler(this.ViewDetails);
             // 
             // DataTable
             // 

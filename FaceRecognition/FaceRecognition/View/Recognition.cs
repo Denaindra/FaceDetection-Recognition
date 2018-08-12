@@ -23,9 +23,9 @@ namespace FaceRecognition.View
         private Image<Bgr, byte> currentFrame;
         private FaceController faceController = new FaceController();
         private List<int> imageids = new List<int>();
-        private readonly String[] firstYearSubjects = { "CF", "DCCN", "MIT", "IPF" };
+        private readonly String[] firstYearSubjects = { "CF", "DCCN", "MIT", "IPE" };
         private readonly String[] secondYearSubjects = { "CGM", "DBMS", "SE", "ELS" };
-        private readonly String[] thirudYearSubjects = { "AAF", "CSSD", "AAF", "ADBCSA" };
+        private readonly String[] thirudYearSubjects = { "AAF", "CSSD", "MITP", "ADBCSA" };
         public Recognition()
         {
             Application.DoEvents();

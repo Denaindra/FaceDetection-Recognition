@@ -26,9 +26,9 @@ namespace FaceRecognition.View
         private Image<Bgr, Byte> ImageFrame;
         private Bitmap cropImage;
         private static string Pattern="^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
-        private readonly String[] firstYearSubjects = {"CF","DCCN","MIT","IPF" };
+        private readonly String[] firstYearSubjects = {"CF","DCCN","MIT","IPE" };
         private readonly String[] secondYearSubjects = {"CGM","DBMS","SE","ELS"};
-        private readonly String[] thirudYearSubjects = { "AAF", "CSSD", "AAF","ADBCSA" };
+        private readonly String[] thirudYearSubjects = { "AAF", "CSSD", "MITP", "ADBCSA" };
 
       
 

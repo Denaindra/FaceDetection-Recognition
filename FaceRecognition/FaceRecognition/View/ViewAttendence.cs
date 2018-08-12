@@ -18,15 +18,15 @@ namespace FaceRecognition.View
         private string batch;
         private List<DateTime> registertime;
         private List<string> mailList;
-        private readonly String[] firstYearSubjects = { "CF", "DCCN", "MIT", "IPF" };
+        private readonly String[] firstYearSubjects = { "CF", "DCCN", "MIT", "IPE" };
         private readonly String[] secondYearSubjects = { "CGM", "DBMS", "SE", "ELS" };
-        private readonly String[] thirudYearSubjects = { "AAF", "CSSD", "AAF", "ADBCSA" };
+        private readonly String[] thirudYearSubjects = { "AAF", "CSSD", "MITP", "ADBCSA" };
 
         public ViewAttendence()
         {
             InitializeComponent();
         }
-        private void Viewbtn_Click(object sender, EventArgs e)
+        private void ViewDetails(object sender, EventArgs e)
         {
 
 
