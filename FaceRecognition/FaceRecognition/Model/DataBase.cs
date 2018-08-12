@@ -21,8 +21,8 @@ namespace FaceRecognition.Model
         private const string connetionString = "Data Source=DESKTOP-FACGP3T;Initial Catalog=StRecognize;Integrated Security=True";
         List<string> imageID = new List<string>();
         List<int> subjects = new List<int>();
-        List<string> studentmail = new List<string>();
-        List<DateTime> currenttime = new List<DateTime>();
+
+        
 
         public DataBase()
         {
@@ -346,42 +346,29 @@ namespace FaceRecognition.Model
             return "";
         }
 
-        public List<string> Getstudentmail(string batchcode)
+        public string Getstudentmail(string studentId)
         {
-            studentmail.Clear();
-            currenttime.Clear();
-
-            sql = "SELECT StudentDetails.Email,RegisterDetails.ETime FROM StudentDetails INNER JOIN RegisterDetails ON StudentDetails.StudentID=RegisterDetails.StudentID";
+            string mail = string.Empty;
+            sql = "SELECT Email FROM StudentDetails Where StudentID='"+studentId+"'";
             cnn = new SqlConnection(connetionString);
             cnn.Open();
             com = new SqlCommand(sql, cnn);
             SqlDataReader DataReader = com.ExecuteReader();
             while (DataReader.Read())
             {
-                studentmail.Add(Convert.ToString(DataReader["Email"]));
-                currenttime.Add(Convert.ToDateTime(DataReader["ETime"].ToString()));
+            mail=Convert.ToString(DataReader["Email"]);
+               
             }
             com.Dispose();
             cnn.Close();
-            return studentmail;
+            return mail;
         }
         public List<int> GetSudentSubjects(int studentID)
         {
             return subjects;
 
         }
-        public List<DateTime> Getcurrentlist(string batchcode)
-        {
-            return currenttime;
-        }
-        public void DeletaeAttendece()
-        {
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
-            SqlCommand command = new SqlCommand("DELETE FROM RegisterDetails", cnn);
-            command.ExecuteNonQuery();
-            cnn.Close();
-        }
+
         public bool CheckUserAuthontication(string username, string password)
         {
             int temp = 0;

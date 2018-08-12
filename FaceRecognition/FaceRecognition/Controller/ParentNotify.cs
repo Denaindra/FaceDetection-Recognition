@@ -39,12 +39,6 @@ namespace FaceRecognition.Controller
            return instants;
        }
 
-       public void setmail(List<string> mailList, List<DateTime> registertime)
-       {
-           for (int a = 0; a < mailList.Count;a++ )
-           {
-               SendMessage(mailList[a],registertime[a]);
-           }
-       }
+ 
    }
 }

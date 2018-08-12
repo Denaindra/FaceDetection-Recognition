@@ -133,21 +133,12 @@ namespace FaceRecognition.Controller
         {
             return database.TotoalStudents(studentId,subject);
         }
-        public List<string>StudentMails(string batchcode)
+        public string GetMail(string studentID)
         {
-            return database.Getstudentmail(batchcode);
+            return database.Getstudentmail(studentID);
         }
-        public List<DateTime> Studentretime(string batchcode)
-        {
-            return database.Getcurrentlist(batchcode);
-        }
-        public void startNotify(List<string> mailList, List<DateTime> registertime)
-        {
-           notify.setmail(mailList,registertime);
-        }
-        public void removedata()
-        {
-            database.DeletaeAttendece();
-        }
+
+
+      
     }
 }

@@ -22,6 +22,7 @@ namespace FaceRecognition.View
         private ImageResizeAdaptee adpater = new ImageResizeApter();
         private Image<Bgr, byte> currentFrame;
         private FaceController faceController = new FaceController();
+        private ParentNotify parentNotify;
         private List<int> imageids = new List<int>();
         private readonly String[] firstYearSubjects = { "CF", "DCCN", "MIT", "IPE" };
         private readonly String[] secondYearSubjects = { "CGM", "DBMS", "SE", "ELS" };
@@ -30,6 +31,11 @@ namespace FaceRecognition.View
         {
             Application.DoEvents();
             InitializeComponent();
+
+            if (parentNotify == null)
+            {
+                parentNotify = ParentNotify.getinstances();
+            }
         }
         private void ProcessFrame(object sender, EventArgs e)
         {
@@ -49,6 +55,8 @@ namespace FaceRecognition.View
                         registerSucessMessage.Text = "Registered :)  See you soon ";
                         disImage.Image = Image.FromFile(Application.StartupPath + "/faces/" + faceController.UserID() + "_A" + ".png");
                         faceController.AddStudentToSheet(faceController.UserID(), batchCode.Text, faceController.GetCurrentTime(), faceController.GetCurrentDate(), subjectList.Text);
+
+                        parentNotify.SendMessage(faceController.GetMail(faceController.UserID().ToString()), DateTime.Now);
                         faceController.SetNameAsempty();
                         registerSucessMessage.Text = "Next Please ... ";
 

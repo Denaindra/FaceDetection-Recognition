@@ -36,19 +36,7 @@ namespace FaceRecognition.View
             Number.Text = studentCount.ToString();
             eligibleText.Text = studentCount >= 20 ? "Student is eligible" :  "Student is not eligible";
         }
-        private void metroButton1_Click(object sender, EventArgs e)
-        {
-            batch = subjects.Text;
-            mailList = faceController.StudentMails(batch);
-            registertime = faceController.Studentretime(batch);
-            faceController.startNotify(mailList,registertime);
-            
-        }
 
-        private void metroButton2_Click(object sender, EventArgs e)
-        {
-            faceController.removedata();
-        }
 
         private void DateSelected(object sender, DateRangeEventArgs e)
         {
