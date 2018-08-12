@@ -48,6 +48,18 @@ namespace FaceRecognition.View
         private void metroButton2_Click(object sender, EventArgs e)
         {
             faceController.removedata();
-        }       
+        }
+
+        private void DateSelected(object sender, DateRangeEventArgs e)
+        {
+            if (!subjects.Text.Equals(string.Empty) && !BatchCode.Text.Equals(string.Empty))
+            {
+                var selectedDate = e.Start;
+                DataTable.DataSource = faceController.GetDayAttendenceStudentList(subjects.Text, BatchCode.Text, selectedDate);
+            }
+            else {
+                MessageBox.Show("Please fill the Subject and Batch code", "Warring");
+            }
+        }
     }
 }

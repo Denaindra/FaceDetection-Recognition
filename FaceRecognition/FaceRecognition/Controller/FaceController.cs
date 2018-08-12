@@ -66,6 +66,12 @@ namespace FaceRecognition.Controller
             userRecognition.LoadHrrcascade();
             userRecognition.Loadfaces();
         }
+
+        public DataTable GetDayAttendenceStudentList(string subject, string batch,DateTime selectedDate)
+        {
+            return database.GetDayStudentAttendece(subject,batch,selectedDate);
+        }
+
         public void StartFacerecognition(Image<Bgr, byte> currentFrame)
         {
             userRecognition.Addname();
@@ -135,12 +141,10 @@ namespace FaceRecognition.Controller
         {
             return database.Getcurrentlist(batchcode);
         }
-
         public void startNotify(List<string> mailList, List<DateTime> registertime)
         {
            notify.setmail(mailList,registertime);
         }
-
         public void removedata()
         {
             database.DeletaeAttendece();

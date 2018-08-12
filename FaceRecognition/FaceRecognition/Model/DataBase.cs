@@ -104,6 +104,33 @@ namespace FaceRecognition.Model
             }
 
         }
+
+        public DataTable GetDayStudentAttendece(string subject, string batch,DateTime selectedDate)
+        {
+            DataTable tabl = new DataTable();
+            try
+            {
+                sql = "select * from RegisterDetails where Batch='" + batch + "' and Subjects='" + subject + "' and ReDate='"+ selectedDate+ "'";
+                cnn = new SqlConnection(connetionString);
+                cnn.Open();
+                com = new SqlCommand(sql, cnn);
+                SqlDataAdapter Sda = new SqlDataAdapter();
+                Sda.SelectCommand = com;
+                Sda.Fill(tabl);
+
+                com.Dispose();
+                cnn.Close();
+                return tabl;
+
+            }
+            catch (Exception ex)
+            {
+                string a = ex.ToString();
+            }
+
+            return tabl;
+        }
+
         public int GetLastStudenID()
         {
             int id = 0;
