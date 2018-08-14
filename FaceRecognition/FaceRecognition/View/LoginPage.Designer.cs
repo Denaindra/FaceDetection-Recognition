@@ -66,6 +66,7 @@
             this.pasWord.Name = "pasWord";
             this.pasWord.Size = new System.Drawing.Size(227, 20);
             this.pasWord.TabIndex = 3;
+            this.pasWord.UseSystemPasswordChar = true;
             // 
             // button1
             // 
