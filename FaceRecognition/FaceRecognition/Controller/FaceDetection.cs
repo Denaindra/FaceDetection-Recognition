@@ -34,19 +34,22 @@ namespace FaceRecognition.Controller
        }
        public void ImageGray()
        {
+            //image grascale
            this.grayImage = this.ImageFrame.Convert<Gray, byte>();
        }
        public void HarrCasCade() {
-           var faces = this.grayImage.DetectHaarCascade(harr, ScaleFactor, minMabours, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, size)[0];
+            //Face Detector
+            var faces = this.grayImage.DetectHaarCascade(harr, ScaleFactor, minMabours, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, size)[0];
            i++;
-
-           foreach (var face in faces)
+            //Action for each element detected
+            foreach (var face in faces)
            {
                try
                {
                    Rectangle rects = face.rect;
                     if (rects.Height > 350 && rects.Width > 350)
                     {
+                        //draw the face detected channel with green color
                         this.ImageFrame.Draw(face.rect, new Bgr(Color.Green), 2);
                        this.cropImage = this.mapImage.Clone(face.rect, PixelFormat.Format8bppIndexed);
 
@@ -64,7 +67,8 @@ namespace FaceRecognition.Controller
            this.mapImage = grayImage.ToBitmap();
        }
        public void LoadHarrCascade() {
-           harr = new HaarCascade("haarcascade_frontalface_default.xml");
+            //Load haarcascades for face detection
+            harr = new HaarCascade("haarcascade_frontalface_default.xml");
        }
        public Bitmap GetCropImage() {
            return this.cropImage;

@@ -49,10 +49,12 @@ namespace FaceRecognition.Controller
         }
         public void LoadHrrcascade()
         {
+            //Load haarcascades for face detection
             face = new HaarCascade("haarcascade_frontalface_default.xml");
         }
         public void Loadfaces()
         {
+            //Load of previus trainned faces and labels for each image
             trainingfaces.Clear();
             try
             {
@@ -89,26 +91,33 @@ namespace FaceRecognition.Controller
         }
         public void FaceDetector()
         {
+            //detect face detection
             facedReco = this.gray.DetectHaarCascade(
             this.face,
             this.scaleFactor,
             this.minNabours,
             Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
             new Size(20, 20));
+
+            //Action for each element detected
             foreach (MCvAvgComp f in facedReco[0])
             {
                 try
                 {
-                   
                         t++;
+                    //resized image
                         result = currentFrame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-                        currentFrame.Draw(f.rect, new Bgr(Color.Green), 2);
+                    //draw the face detected in the 0th (gray) channel with green color
+                    currentFrame.Draw(f.rect, new Bgr(Color.Green), 2);
                         if (this.trainingfaces.ToArray().Length != 0)
                         {
+                        //TermCriteria for face recognition with numbers of trained images like maxIteration
                             termCrit = new MCvTermCriteria(GetContTrain(), 0.001);
+                        //Eigen face recognizer
                             EigenObjectRecognizers eginrecog = new EigenObjectRecognizers(this.trainingfaces.ToArray(), imageids.ToArray(), 3000, ref termCrit);
                             ID = eginrecog.Recognize(result);
-                            currentFrame.Draw(ID, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.LightGreen));
+                        //Draw the label for each face detected and recognized
+                        currentFrame.Draw(ID, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.LightGreen));
                         }
                     
                         IDofPersons[t - 1] = ID;
@@ -125,6 +134,7 @@ namespace FaceRecognition.Controller
         {
             t = 0;
         }
+        //Load user IDs
         public void nameContainer()
         {
             for (int x = 0; x < this.facedReco[0].Length; x++)
@@ -148,6 +158,7 @@ namespace FaceRecognition.Controller
         {
             return instants;
         }
+        //Get Curent UserID
         public int GetUSerID()
         {
             if (ID != null && ID != "")
