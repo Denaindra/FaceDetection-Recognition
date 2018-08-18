@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using FaceRecognition.Model;
 using System.Data;
+using ClosedXML.Excel;
 
 namespace FaceRecognition.Controller
 {
@@ -137,7 +138,14 @@ namespace FaceRecognition.Controller
         {
             return database.Getstudentmail(studentID);
         }
+        public void GenerateReports(DataTable table)
+        {
+            XLWorkbook wb = new XLWorkbook();
+            DataTable dt = table;
 
+            wb.Worksheets.Add(dt, "WorksheetName");
+            wb.SaveAs(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"/"+DateTime.Today.DayOfWeek+"_"+"report"+".xlsx");
+        }
 
       
     }

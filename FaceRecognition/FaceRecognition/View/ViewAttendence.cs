@@ -14,7 +14,7 @@ namespace FaceRecognition.View
 {
     public partial class ViewAttendence : MetroForm
     {
-        private FaceController faceController = new FaceController();
+        private FaceController faceController;
         private string batch;
         private List<DateTime> registertime;
         private List<string> mailList;
@@ -25,16 +25,19 @@ namespace FaceRecognition.View
         public ViewAttendence()
         {
             InitializeComponent();
+            faceController = new FaceController();
         }
         private void ViewDetails(object sender, EventArgs e)
         {
 
 
-            DataTable.DataSource = faceController.GetStudentAttendenceList(faceController.GetStudentID(IDTextBox.Text), subjects.Text);
+            var dataSource = faceController.GetStudentAttendenceList(faceController.GetStudentID(IDTextBox.Text), subjects.Text);
             var studentCount = faceController.TotalCount(faceController.GetStudentID(IDTextBox.Text), subjects.Text);
             
             Number.Text = studentCount.ToString();
             eligibleText.Text = studentCount >= 20 ? "Student is eligible" :  "Student is not eligible";
+            DataTable.DataSource = dataSource;
+            faceController.GenerateReports(dataSource);
         }
 
 
@@ -43,7 +46,9 @@ namespace FaceRecognition.View
             if (!subjects.Text.Equals(string.Empty) && !BatchCode.Text.Equals(string.Empty))
             {
                 var selectedDate = e.Start;
-                DataTable.DataSource = faceController.GetDayAttendenceStudentList(subjects.Text, BatchCode.Text, selectedDate);
+               var dataSource= faceController.GetDayAttendenceStudentList(subjects.Text, BatchCode.Text, selectedDate);
+                DataTable.DataSource = dataSource;
+                faceController.GenerateReports(dataSource);
             }
             else {
                 MessageBox.Show("Please fill the Subject and Batch code", "Warring");

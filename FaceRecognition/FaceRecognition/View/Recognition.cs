@@ -19,7 +19,6 @@ namespace FaceRecognition.View
     {
         private Capture capture;
         private bool captureSate;
-        private ImageResizeAdaptee adpater = new ImageResizeApter();
         private Image<Bgr, byte> currentFrame;
         private FaceController faceController = new FaceController();
         private ParentNotify parentNotify;

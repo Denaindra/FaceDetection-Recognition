@@ -27,7 +27,7 @@ namespace FaceRecognition.Controller
                client.Port = 587;
                client.Credentials = new System.Net.NetworkCredential("thisarafyp@gmail.com", "thisara123");
                client.EnableSsl = true;
-               client.Send(mail);
+               client.SendMailAsync(mail);
            }
            catch (Exception ex)
            {
